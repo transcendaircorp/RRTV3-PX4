@@ -1,5 +1,5 @@
-uint64 timestamp	# time since system start (microseconds)
-char[10] name           # max. 10 characters as key / name
-float32 x               # x value
-float32 y               # y value
-float32 z               # z value
+uint8 ARRAY_SIZE = 20
+uint64 timestamp            # time since system start (microseconds)
+uint16 id                   # unique ID of debug array, used to discriminate between arrays
+char[10] name               # name of the debug array (max. 10 characters)
+float32[20] data            # data

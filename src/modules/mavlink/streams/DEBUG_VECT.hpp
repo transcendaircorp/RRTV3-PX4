@@ -63,12 +63,15 @@ private:
 
 		if (_debug_sub.update(&debug)) {
 			mavlink_debug_vect_t msg{};
+
 			msg.time_usec = debug.timestamp;
+			msg.array_id = debug.id;
 			memcpy(msg.name, debug.name, sizeof(msg.name));
 			msg.name[sizeof(msg.name) - 1] = '\0'; // enforce null termination
-			msg.x = debug.x;
-			msg.y = debug.y;
-			msg.z = debug.z;
+
+			for (size_t i = 0; i < debug_vect_s::ARRAY_SIZE; i++) {
+				msg.data[i] = debug.data[i];
+			}
 
 			mavlink_msg_debug_vect_send_struct(_mavlink->get_channel(), &msg);
 
