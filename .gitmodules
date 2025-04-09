@@ -2,10 +2,10 @@
 #   url = https://github.com/mavlink/mavlink.git
 # But now we use a TAC repo cuz the TAC repo contains the common.xml
 # we want to (and need to) use
-[submodule "src/modules/mavlink/mavlink"]
-	path = src/modules/mavlink/mavlink
-	url = https://github.com/transcendaircorp/RRTV3-mavlink.git
-	branch = master
+##[submodule "src/modules/mavlink/mavlink"]
+##	path = src/modules/mavlink/mavlink
+##	url = https://github.com/transcendaircorp/RRTV3-mavlink.git
+##	branch = master
 [submodule "src/drivers/uavcan/libuavcan"]
 	path = src/drivers/uavcan/libuavcan
 	url = https://github.com/dronecan/libuavcan.git
