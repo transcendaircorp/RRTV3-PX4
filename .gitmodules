@@ -1,7 +1,11 @@
+# The URL for the mavlink bits was...
+#   url = https://github.com/mavlink/mavlink.git
+# But now we use a TAC repo cuz the TAC repo contains the common.xml
+# we want to (and need to) use
 [submodule "src/modules/mavlink/mavlink"]
 	path = src/modules/mavlink/mavlink
-	url = https://github.com/mavlink/mavlink.git
-	branch = master
+	url = https://github.com/transcendaircorp/RRTV3-mavlink.git
+	branch = main
 [submodule "Tools/simulation/jmavsim/jMAVSim"]
 	path = Tools/simulation/jmavsim/jMAVSim
 	url = https://github.com/PX4/jMAVSim.git
