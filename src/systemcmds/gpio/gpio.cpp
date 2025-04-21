@@ -213,7 +213,7 @@ int handle_board_ports(bool is_read, int argc, char *argv[])
 		return -1;
 	}
 
-	PX4_DEBUG("port=%c, pin=%i", port, pin);
+	PX4_DEBUG("port=%c, pin=%li", port, pin);
 
 	bool matches_default_config = false;
 #if defined(PX4_GPIO_INIT_LIST)
