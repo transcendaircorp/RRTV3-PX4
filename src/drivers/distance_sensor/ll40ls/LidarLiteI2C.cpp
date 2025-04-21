@@ -174,7 +174,7 @@ LidarLiteI2C::probe()
 
 				if (_unit_id > 0) {
 					// v2
-					PX4_DEBUG("probe success - hw: %" PRIu8 ", sw:%" PRIu8 ", id: %" PRIu16, _hw_version, _sw_version, _unit_id);
+					PX4_DEBUG("probe success - hw: %" PRIu8 ", sw:%" PRIu8 ", id: %" PRIu32, _hw_version, _sw_version, _unit_id); // RAS
 					_px4_rangefinder.set_max_distance(LL40LS_MAX_DISTANCE_V2);
 
 				} else {
@@ -187,7 +187,7 @@ LidarLiteI2C::probe()
 				if (_unit_id > 0) {
 					// v3hp
 					_model = Model::v3hp;
-					PX4_DEBUG("probe success - id: %" PRIu16, _unit_id);
+					PX4_DEBUG("probe success - id: %" PRIu32, _unit_id);
 				}
 			}
 
@@ -195,7 +195,7 @@ LidarLiteI2C::probe()
 			return OK;
 		}
 
-		PX4_DEBUG("probe failed unit_id=0x%02" PRIx16 " hw_version=0x%02" PRIu8 " sw_version=0x%02" PRIu8,
+		PX4_DEBUG("probe failed unit_id=0x%02" PRIx32 " hw_version=0x%02" PRIu8 " sw_version=0x%02" PRIu8,
 			  _unit_id,  _hw_version, _sw_version);
 
 	}

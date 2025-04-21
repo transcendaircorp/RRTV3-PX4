@@ -1,3 +1,6 @@
+#ifdef PRINTF_LOG
+#undef PRINTF_LOG // RAS
+#endif
 /****************************************************************************
  *
  *   Copyright (c) 2013-2022 PX4 Development Team. All rights reserved.

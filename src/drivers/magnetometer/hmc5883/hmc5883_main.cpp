@@ -63,7 +63,7 @@ I2CSPIDriverBase *HMC5883::instantiate(const I2CSPIDriverConfig &config, int run
 
 	if (interface->init() != OK) {
 		delete interface;
-		PX4_DEBUG("no device on bus %i (devid 0x%x)", config.bus, config.spi_devid);
+		PX4_DEBUG("no device on bus %i (devid 0x%lx)", config.bus, config.spi_devid);
 		return nullptr;
 	}
 

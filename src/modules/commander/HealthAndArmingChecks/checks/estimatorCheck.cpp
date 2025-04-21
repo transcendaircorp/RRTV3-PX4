@@ -1,3 +1,7 @@
+#ifdef PRINTF_LOG
+// RAS avoid crap via mavlink_log_critical()...
+#undef PRINTF_LOG
+#endif
 /****************************************************************************
  *
  *   Copyright (c) 2019-2023 PX4 Development Team. All rights reserved.
