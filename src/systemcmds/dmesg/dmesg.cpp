@@ -36,6 +36,8 @@
 #include <px4_platform_common/module.h>
 #include <px4_platform_common/getopt.h>
 
+#include <poll.h>
+
 #ifndef BOARD_ENABLE_CONSOLE_BUFFER
 #error "This module can only be used on boards that enable BOARD_ENABLE_CONSOLE_BUFFER"
 #endif
@@ -53,6 +55,7 @@ dmesg_main(int argc, char *argv[])
 	int ch;
 	const char *myoptarg = nullptr;
 	bool follow = false;
+    static int offset = -1;
 
 	while ((ch = px4_getopt(argc, argv, "f", &myoptind, &myoptarg)) != EOF) {
 		switch (ch) {
@@ -67,7 +70,30 @@ dmesg_main(int argc, char *argv[])
 		}
 	}
 
-	px4_console_buffer_print(follow);
+    if (!follow)
+        offset = -1;
+
+    do {
+        char c;
+        struct pollfd fds;
+        int ret;
+
+        offset = px4_console_buffer_print(follow, offset);
+
+        fds.fd = 0; /* stdin */
+        fds.events = POLLIN;
+        ret = poll(&fds, 1, 0);
+        if (ret > 0) {
+            ret = read(0, &c, 1);
+            if (ret) {
+                follow = 0;
+                break;
+            }
+        }
+        if (follow) {
+            px4_usleep(200000);
+        }
+    } while (follow);
 
 	return 0;
 }

@@ -60,7 +60,7 @@ int px4_console_buffer_init();
  * @param follow if true keep waiting and print new content whenever the buffer
  *               is updated
  */
-void px4_console_buffer_print(bool follow);
+int px4_console_buffer_print(bool follow, int offset);
 
 /**
  * Get the current used buffer size

@@ -53,7 +53,7 @@ public:
 
 	void write(const char *buffer, size_t len);
 
-	void print(bool follow);
+	int print(bool follow, int offset);
 
 	int size();
 
@@ -69,14 +69,13 @@ private:
 	px4_sem_t _lock = SEM_INITIALIZER(1);
 };
 
-void ConsoleBuffer::print(bool follow)
+int ConsoleBuffer::print(bool follow, int offset)
 {
 	// print to stdout, but with a buffer in between to avoid nested locking and potential dead-locks
 	// (which could happen in combination with the MAVLink shell: dmesg writing to the pipe waiting
 	// mavlink to read, while mavlink calls printf, waiting for the console lock)
 	const int buffer_length = 512;
 	char buffer[buffer_length];
-	int offset = -1;
 
 	do {
 
@@ -100,10 +99,9 @@ void ConsoleBuffer::print(bool follow)
 		} while (total_size_read < BOARD_CONSOLE_BUFFER_SIZE);
 
 
-		if (follow) {
-			usleep(10000);
-		}
+        follow = 0;
 	} while (follow);
+    return offset;
 }
 
 void ConsoleBuffer::write(const char *buffer, size_t len)
@@ -188,9 +186,9 @@ int ConsoleBuffer::read(char *buffer, int buffer_length, int *offset)
 static ConsoleBuffer g_console_buffer;
 
 
-void px4_console_buffer_print(bool follow)
+int px4_console_buffer_print(bool follow, int offset)
 {
-	g_console_buffer.print(follow);
+	return g_console_buffer.print(follow, offset);
 }
 
 ssize_t console_buffer_write(struct file *filep, const char *buffer, size_t len)
