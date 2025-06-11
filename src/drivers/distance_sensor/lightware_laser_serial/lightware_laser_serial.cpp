@@ -138,7 +138,7 @@ LightwareLaserSerial::init()
 		/* SF30/d (200m 156Hz) */
 		_px4_rangefinder.set_min_distance(0.2f);
 		_px4_rangefinder.set_max_distance(200.0f);
-		_interval = 1e6 / 156;
+		_interval = 1e6 / 78;
 		_simple_serial = true;
 		break;
 
@@ -190,11 +190,9 @@ int LightwareLaserSerial::collect()
 		/* only throw an error if we time out */
 		if (read_elapsed > (_interval * 2)) {
 			return ret;
-
 		} else {
 			return -EAGAIN;
 		}
-
 	} else if (ret == 0) {
 		return -EAGAIN;
 	}
@@ -224,7 +222,6 @@ int LightwareLaserSerial::collect()
 				}
 			}
 		}
-
 	} else {
 		for (int i = 0; i < ret; i++) {
 			if (OK == lightware_parser(readbuf[i], _linebuf, &_linebuf_index, &_parse_state, &distance_m)) {

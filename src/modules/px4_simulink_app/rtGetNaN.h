@@ -1,5 +1,5 @@
 //
-// File: rtmodel.h
+// File: rtGetNaN.h
 //
 // Code generated for Simulink model 'RRTV3_PX4_OA'.
 //
@@ -12,15 +12,33 @@
 // Code generation objectives: Unspecified
 // Validation result: Not run
 //
-#ifndef rtmodel_h_
-#define rtmodel_h_
-#include "RRTV3_PX4_OA.h"
+#ifndef rtGetNaN_h_
+#define rtGetNaN_h_
 
-// Macros generated for backwards compatibility
-#ifndef rtmGetStopRequested
-#define rtmGetStopRequested(rtm)       ((void*) 0)
+extern "C"
+{
+
+#include "rt_nonfinite.h"
+
+}
+
+#include "rtwtypes.h"
+#ifdef __cplusplus
+
+extern "C"
+{
+
 #endif
-#endif                                 // rtmodel_h_
+
+  extern real_T rtGetNaN(void);
+  extern real32_T rtGetNaNF(void);
+
+#ifdef __cplusplus
+
+}                                      // extern "C"
+
+#endif
+#endif                                 // rtGetNaN_h_
 
 //
 // File trailer for generated code.

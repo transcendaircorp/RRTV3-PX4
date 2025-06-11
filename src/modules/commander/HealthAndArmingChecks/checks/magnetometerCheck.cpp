@@ -204,6 +204,7 @@ void MagnetometerChecks::consistencyCheck(const Context &context, Report &report
 	// Use the difference between sensors to detect a bad calibration, orientation or magnetic interference.
 	// If a single sensor is fitted, the value being checked will be zero so this check will always pass.
 	if (sensors.mag_inconsistency_angle > math::radians<float>(_param_com_arm_mag_ang.get())) {
+#if 1
 		int inconsistency_angle_deg = static_cast<int>(math::degrees<float>(sensors.mag_inconsistency_angle));
 		/* EVENT
 		 * @description
@@ -220,6 +221,11 @@ void MagnetometerChecks::consistencyCheck(const Context &context, Report &report
 		if (reporter.mavlink_log_pub()) {
 			mavlink_log_critical(reporter.mavlink_log_pub(), "Preflight Fail: Compasses %d° inconsistent",
 					     inconsistency_angle_deg);
+#else
+		if (reporter.mavlink_log_pub()) {
+			mavlink_log_critical(reporter.mavlink_log_pub(), "Preflight Fail: Compasses %d° inconsistent",
+					     999);
+#endif
 		}
 	}
 }

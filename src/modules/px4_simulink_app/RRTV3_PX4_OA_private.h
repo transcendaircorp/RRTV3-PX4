@@ -1,5 +1,5 @@
 //
-// File: rtmodel.h
+// File: RRTV3_PX4_OA_private.h
 //
 // Code generated for Simulink model 'RRTV3_PX4_OA'.
 //
@@ -12,15 +12,19 @@
 // Code generation objectives: Unspecified
 // Validation result: Not run
 //
-#ifndef rtmodel_h_
-#define rtmodel_h_
+#ifndef RRTV3_PX4_OA_private_h_
+#define RRTV3_PX4_OA_private_h_
+#include "rtwtypes.h"
+#include "RRTV3_PX4_OA_types.h"
 #include "RRTV3_PX4_OA.h"
 
-// Macros generated for backwards compatibility
-#ifndef rtmGetStopRequested
-#define rtmGetStopRequested(rtm)       ((void*) 0)
-#endif
-#endif                                 // rtmodel_h_
+extern real_T rt_atan2d_snf(real_T u0, real_T u1);
+extern real_T rt_roundd_snf(real_T u);
+extern real_T rt_powd_snf(real_T u0, real_T u1);
+extern real_T look1_binlxpw(real_T u0, const real_T bp0[], const real_T table[],
+  uint32_T maxIndex);
+
+#endif                                 // RRTV3_PX4_OA_private_h_
 
 //
 // File trailer for generated code.

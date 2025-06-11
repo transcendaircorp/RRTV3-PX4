@@ -52,6 +52,10 @@
 #include <uORB/topics/sensor_gyro_fifo.h>
 #include <uORB/topics/sensor_selection.h>
 #include <uORB/topics/vehicle_imu_status.h>
+#include <uORB/topics/input_rc.h>
+#include <uORB/topics/rc_channels.h>
+#include <uORB/topics/rc_parameter_map.h>
+#include <uORB/topics/debug_vect.h>
 
 #include "arm_math.h"
 #include "arm_const_structs.h"
@@ -89,6 +93,7 @@ private:
 	inline float EstimatePeakFrequencyBin(q15_t fft[], int peak_index);
 	inline void Publish();
 	bool SensorSelectionUpdate(bool force = false);
+	void RASUpdate();
 	void Update(const hrt_abstime &timestamp_sample, int16_t *input[], uint8_t N);
 	inline void UpdateOutput(const hrt_abstime &timestamp_sample, int axis, float peak_frequencies[MAX_NUM_PEAKS],
 				 float peak_snr[MAX_NUM_PEAKS], int num_peaks_found);
@@ -118,6 +123,12 @@ private:
 
 	uORB::Subscription _sensor_selection_sub{ORB_ID(sensor_selection)};
 	uORB::Subscription _vehicle_imu_status_sub{ORB_ID(vehicle_imu_status)};
+
+    // RAS
+	uORB::Subscription _input_rc_sub{ORB_ID(input_rc)};
+	uORB::Subscription _rc_channels_sub{ORB_ID(rc_channels)};
+	uORB::Subscription _rc_parameter_map_sub{ORB_ID(rc_parameter_map)};
+	uORB::Subscription _debug_sub{ORB_ID(debug_vect)};
 
 	uORB::SubscriptionCallbackWorkItem _sensor_gyro_sub{this, ORB_ID(sensor_gyro)};
 	uORB::SubscriptionCallbackWorkItem _sensor_gyro_fifo_sub{this, ORB_ID(sensor_gyro_fifo)};
