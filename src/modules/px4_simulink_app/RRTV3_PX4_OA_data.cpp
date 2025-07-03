@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'RRTV3_PX4_OA'.
 //
-// Model version                  : 10.106
+// Model version                  : 10.127
 // Simulink Coder version         : 24.1 (R2024a) 19-Nov-2023
-// C/C++ source code generated on : Wed Jun 11 09:52:11 2025
+// C/C++ source code generated on : Thu Jul  3 14:04:39 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -3029,9 +3029,9 @@ P_RRTV3_PX4_OA_T RRTV3_PX4_OA_P = {
   // Expression: MPRPM_ext(2:end)
   //  Referenced by: '<S73>/Main Prop 1'
 
-  { 0.0, 1195.0, 1723.0, 2217.0, 2695.0, 3126.0, 3530.0, 3892.0, 4193.0, 4367.0,
-    4541.0, 4715.0, 4889.0, 5063.0, 5237.0, 5411.0, 5585.0, 5759.0, 5933.0,
-    6107.0 },
+  { 0.0, 1101.0, 1534.0, 2008.0, 2496.0, 2967.0, 3396.0, 3792.0, 4163.0, 4488.0,
+    4813.0, 5138.0, 5463.0, 5788.0, 6113.0, 6438.0, 6763.0, 7088.0, 7413.0,
+    7738.0 },
 
   // Expression: MPPWM_ext(2:end)
   //  Referenced by: '<S73>/Main Prop 2'
@@ -3043,9 +3043,9 @@ P_RRTV3_PX4_OA_T RRTV3_PX4_OA_P = {
   // Expression: MPRPM_ext(2:end)
   //  Referenced by: '<S73>/Main Prop 2'
 
-  { 0.0, 1195.0, 1723.0, 2217.0, 2695.0, 3126.0, 3530.0, 3892.0, 4193.0, 4367.0,
-    4541.0, 4715.0, 4889.0, 5063.0, 5237.0, 5411.0, 5585.0, 5759.0, 5933.0,
-    6107.0 },
+  { 0.0, 1101.0, 1534.0, 2008.0, 2496.0, 2967.0, 3396.0, 3792.0, 4163.0, 4488.0,
+    4813.0, 5138.0, 5463.0, 5788.0, 6113.0, 6438.0, 6763.0, 7088.0, 7413.0,
+    7738.0 },
 
   // Expression: 2000
   //  Referenced by: '<S73>/[1000,2000]'
@@ -3085,7 +3085,12 @@ P_RRTV3_PX4_OA_T RRTV3_PX4_OA_P = {
   // Expression: 1000
   //  Referenced by: '<S73>/[1000 2000]1'
 
-  1000.0
+  1000.0,
+
+  // Expression: 100
+  //  Referenced by: '<Root>/Multiply'
+
+  100.0
 };
 
 //

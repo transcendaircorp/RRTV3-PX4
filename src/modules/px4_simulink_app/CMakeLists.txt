@@ -19,9 +19,11 @@ SRCS
    ert_main.cpp
    RRTV3_PX4_OA.cpp
    RRTV3_PX4_OA_data.cpp
+   ScaledPressure2_cgen_wrapper.cpp
    rtGetInf.cpp
    rtGetNaN.cpp
    rt_nonfinite.cpp
+   ScaledPressure2_wrapper.cpp
    MW_PX4_TaskControl.cpp
    nuttxinitialize.cpp
    MW_Parameter.h
@@ -37,6 +39,7 @@ SRCS
    RRTV3_PX4_OA.h
    RRTV3_PX4_OA_private.h
    RRTV3_PX4_OA_types.h
+   ScaledPressure2_cgen_wrapper.h
    rtmodel.h
    rtwtypes.h
    MW_uORB_busstruct_conversion.h

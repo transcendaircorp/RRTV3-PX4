@@ -61,6 +61,7 @@ parameters:
             num_instances: *max_num_config_instances
             instance_start: 1
             default: [-1, -1]
+
     - group: EMF Controllers
       definitions:
         SM_EMF_LAT_${i}:
@@ -740,6 +741,18 @@ parameters:
               1: Raw GPS (VN,VE)
               2: Veh Local Position (Vx,Vy)
             default: 1
+
+        SM_RLX_BATTCK:
+            description:
+                short: relax battery checks
+                long: |
+                    relax battery checks on iron wing
+
+            type: enum
+            values:
+              0: Do not relax
+              1: Allow lower voltage
+            default: 0
     - group: NAV
       definitions:
         SM_NAV_VCMD:

@@ -74,10 +74,23 @@ void PowerChecks::checkAndReport(const Context &context, Report &reporter)
 		if (!system_power.usb_connected) {
 			float avionics_power_rail_voltage = system_power.voltage5v_v;
 
-			const float low_error_threshold = 4.5f;
-			const float low_warning_threshold = 4.8f;
-			const float high_warning_threshold = 5.4f;
+			float low_error_threshold = 4.5f;
+			float low_warning_threshold = 4.8f;
+			float high_warning_threshold = 5.4f;
+            int32_t pf_val = 0;
+            static int checked_for_param = 0;
+            static param_t pf;
 
+            if (!checked_for_param) {
+                pf = param_find("SM_RLX_BATTCK");
+                checked_for_param = 1;
+            }
+
+
+            if (pf != PARAM_INVALID && param_get(pf, &pf_val) != PX4_ERROR && pf_val >= 1) {
+                low_error_threshold -= 0.6f;
+                low_warning_threshold -= 0.6f;
+            }
 			if (avionics_power_rail_voltage < low_warning_threshold) {
 				NavModes affected_groups = NavModes::None;
 

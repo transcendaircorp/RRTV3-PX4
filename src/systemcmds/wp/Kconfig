@@ -1,0 +1,12 @@
+menuconfig SYSTEMCMDS_WP
+	bool "wp"
+	default n
+	---help---
+		Enable support for wp
+
+menuconfig USER_WP
+	bool "wp running as userspace module"
+	default n
+	depends on BOARD_PROTECTED && SYSTEMCMDS_WP
+	---help---
+		Put wp in userspace memory

@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'RRTV3_PX4_OA'.
 //
-// Model version                  : 10.106
+// Model version                  : 10.127
 // Simulink Coder version         : 24.1 (R2024a) 19-Nov-2023
-// C/C++ source code generated on : Wed Jun 11 09:52:11 2025
+// C/C++ source code generated on : Thu Jul  3 14:04:39 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -9093,6 +9093,26 @@ void RRTV3_PX4_OA_step0(void)          // Sample time: [0.02s, 0.0s]
   }
 
   // End of MATLABSystem: '<S3>/PX4 PWM Output'
+
+  // DataTypeConversion: '<Root>/Data Type Conversion' incorporates:
+  //   Gain: '<Root>/Multiply'
+
+  RRTV3_PX4_OA_B.LatRad = floor(RRTV3_PX4_OA_P.Multiply_Gain *
+    static_cast<real_T>(RRTV3_PX4_OA_B.Control_Level));
+  if (rtIsNaN(RRTV3_PX4_OA_B.LatRad) || rtIsInf(RRTV3_PX4_OA_B.LatRad)) {
+    RRTV3_PX4_OA_B.LatRad = 0.0;
+  } else {
+    RRTV3_PX4_OA_B.LatRad = fmod(RRTV3_PX4_OA_B.LatRad, 65536.0);
+  }
+
+  // DataTypeConversion: '<Root>/Data Type Conversion'
+  RRTV3_PX4_OA_B.DataTypeConversion = static_cast<int16_T>(RRTV3_PX4_OA_B.LatRad
+    < 0.0 ? static_cast<int32_T>(static_cast<int16_T>(-static_cast<int16_T>(
+    static_cast<uint16_T>(-RRTV3_PX4_OA_B.LatRad)))) : static_cast<int32_T>(
+    static_cast<int16_T>(static_cast<uint16_T>(RRTV3_PX4_OA_B.LatRad))));
+
+  // S-Function (ScaledPressure2): '<Root>/S-Function Builder'
+  ScaledPressure2_Outputs_wrapper_cgen(&RRTV3_PX4_OA_B.DataTypeConversion);
 
   // MATLABSystem: '<S49>/Max Phi Cmd1'
   if (RRTV3_PX4_OA_DW.obj_e2.SampleTime != RRTV3_PX4_OA_P.MaxPhiCmd1_SampleTime)

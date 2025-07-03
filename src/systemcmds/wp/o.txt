@@ -1,0 +1,45 @@
+    // do the dance infintely
+    for (;;)
+    {
+        float m, d, d_x, d_y, d_lo, d_la, r_earth;
+        int timesThru;
+        int s;
+        long ns;
+
+        // Following code for converting speed/heading into lat/lon changes is derived from
+        // https://stackoverflow.com/questions/7477003/calculating-new-longitude-latitude-from-old-n-meters
+        //
+        // Note that speed is in km/h
+        // The framerate is spec'd by its inverse; maybe we should smooth this value out rather than
+        // using its instantaneous value?
+        d = (speed * 1000 / 3600) * *frameperiod_p;
+
+        // Given that distance, use the heading to determine the X- and y-axis components in meters
+        d_x = d * fabs(cos(heading * M_PI / 180));
+        d_y = d * fabs(sin(heading * M_PI / 180));
+
+        // OK. Now that we have x and y distances in meters, let's turn those distances into deltas
+        // of longitude and latitude...
+        r_earth = 6378 * 1000;  // radius of earth in meters
+        // the "delta latitude" value is the # of meters we want to move times the number of latitudinal degrees per meter
+        m = 1 / ((2.0 * M_PI / 360) * r_earth);
+        d_la = d_x * m;
+
+        disturbLLEByNum(&la, &lo, &el, 0);
+        el += AGL;
+        timesThru = 200;
+        clock0(0);
+        for (j = 0; j < timesThru; j++)
+        {
+            d_lo = (d_y * m) / cos(la * M_PI/180);
+            lo += d_lo;
+            la += d_la;
+            // The following applies to aircraft #1
+            xpnVehiclePropsAndNum(la, lo, el, heading, 0.0, 0.0, 1); myprintf(xpnStatusBuf());
+            mebbePause();
+        }
+        clock1(0, &s, &ns);
+        myprintf("thru the loop in %d.%09d\n", s, ns);
+    }
+    return;
+}

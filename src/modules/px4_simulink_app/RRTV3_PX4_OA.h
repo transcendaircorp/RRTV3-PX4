@@ -3,9 +3,9 @@
 //
 // Code generated for Simulink model 'RRTV3_PX4_OA'.
 //
-// Model version                  : 10.106
+// Model version                  : 10.127
 // Simulink Coder version         : 24.1 (R2024a) 19-Nov-2023
-// C/C++ source code generated on : Wed Jun 11 09:52:11 2025
+// C/C++ source code generated on : Thu Jul  3 14:04:39 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -17,6 +17,7 @@
 #include <poll.h>
 #include <uORB/uORB.h>
 #include "rtwtypes.h"
+#include "ScaledPressure2_cgen_wrapper.h"
 #include "MW_Parameter.h"
 #include "MW_ParameterRead.h"
 #include "MW_PX4_PWM.h"
@@ -143,6 +144,9 @@ struct B_RRTV3_PX4_OA_T {
   uint16_T pwmValue[8];
   real_T Probe[2];                     // '<S116>/Probe'
   real_T Probe_g[2];                   // '<S111>/Probe'
+  real_T GUIDANCE[6];                  // '<S42>/MATLAB Function1'
+  real_T MiscOP[9];                    // '<S42>/MATLAB Function1'
+  real_T PII_collect[17];              // '<S13>/MATLAB Function'
   real_T TmpSignalConversionAtSFunct[2];// '<S6>/LinVel Bus + INS'
   real_T TmpSignalConversionAtSFun_c[2];// '<S6>/LinVel Bus + INS'
   real_T dv4[2];
@@ -150,9 +154,6 @@ struct B_RRTV3_PX4_OA_T {
   real_T MPRPM;                        // '<S11>/ RPM LIMITER'
   real_T OutportBufferForControlCmds[17];// '<S1>/CONTROL MIXER//ALLOCATOR'
   real_T LPRPM;                        // '<S11>/Constant'
-  real_T GUIDANCE[6];                  // '<S42>/MATLAB Function1'
-  real_T MiscOP[9];                    // '<S42>/MATLAB Function1'
-  real_T PII_collect[17];              // '<S13>/MATLAB Function'
   real_T AF;                           // '<S13>/AF Encoder'
   real_T TCS_Out[7];                   // '<S12>/MATLAB Function'
   real_T ulon;                         // '<S8>/fcn_EMF_Long'
@@ -417,6 +418,7 @@ struct B_RRTV3_PX4_OA_T {
   int32_T i;
   int32_T EMF_Long_tmp;
   int32_T LATCS_tmp;
+  int16_T DataTypeConversion;          // '<Root>/Data Type Conversion'
 };
 
 // Block states (default storage) for system '<Root>'
@@ -2067,6 +2069,9 @@ struct P_RRTV3_PX4_OA_T_ {
   real_T u00020001_LowerSat_h;         // Expression: 1000
                                           //  Referenced by: '<S73>/[1000 2000]1'
 
+  real_T Multiply_Gain;                // Expression: 100
+                                          //  Referenced by: '<Root>/Multiply'
+
 };
 
 // Real-time Model Data Structure
@@ -2186,7 +2191,6 @@ extern volatile boolean_T runModel;
 //  Block '<S17>/Data Type Duplicate' : Unused code path elimination
 //  Block '<S12>/Display1' : Unused code path elimination
 //  Block '<S12>/Display11' : Unused code path elimination
-//  Block '<S13>/Display' : Unused code path elimination
 //  Block '<S49>/Data Type Conversion1' : Unused code path elimination
 //  Block '<S49>/Data Type Conversion2' : Unused code path elimination
 //  Block '<S49>/Data Type Conversion3' : Unused code path elimination
@@ -2222,7 +2226,6 @@ extern volatile boolean_T runModel;
 //  Block '<S99>/Data Type Duplicate' : Unused code path elimination
 //  Block '<S100>/Data Type Duplicate' : Unused code path elimination
 //  Block '<S96>/Data Type Conversion11' : Unused code path elimination
-//  Block '<S96>/Display' : Unused code path elimination
 //  Block '<S121>/NOT' : Unused code path elimination
 //  Block '<S105>/NOT' : Unused code path elimination
 //  Block '<S106>/NOT' : Unused code path elimination
