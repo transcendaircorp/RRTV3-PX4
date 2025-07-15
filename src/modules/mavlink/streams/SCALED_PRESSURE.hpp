@@ -66,9 +66,12 @@ private:
 	bool send() override
 	{
 		if (_sensor_baro_sub.updated() || _differential_pressure_sub.updated()) {
+            extern int16_t SM_ControlLevel;
+            extern int16_t SM_TWV;
+
 			mavlink_scaled_pressure_t msg{};
 			mavlink_scaled_pressure2_t msg2{};
-            extern int16_t SM_ControlLevel;
+			mavlink_scaled_pressure3_t msg3{};
 
 			sensor_baro_s sensor_baro;
 
@@ -90,12 +93,20 @@ private:
 			}
 
 			mavlink_msg_scaled_pressure_send_struct(_mavlink->get_channel(), &msg);
+
             msg2.time_boot_ms = msg.time_boot_ms;
             msg2.press_abs = msg.press_abs;
             msg2.press_diff = msg.press_diff;
             msg2.temperature_press_diff = msg.temperature_press_diff;
             msg2.temperature = SM_ControlLevel;
 			mavlink_msg_scaled_pressure2_send_struct(_mavlink->get_channel(), &msg2);
+
+            msg3.time_boot_ms = msg.time_boot_ms;
+            msg3.press_abs = msg.press_abs;
+            msg3.press_diff = msg.press_diff;
+            msg3.temperature_press_diff = msg.temperature_press_diff;
+            msg3.temperature = SM_TWV;
+			mavlink_msg_scaled_pressure3_send_struct(_mavlink->get_channel(), &msg3);
 
 			return true;
 		}
@@ -106,5 +117,6 @@ private:
 
 // For communicating with the Simulink model...
 int16_t SM_ControlLevel;
+int16_t SM_TWV;
 
 #endif // SCALED_PRESSURE_HPP
