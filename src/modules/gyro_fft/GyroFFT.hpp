@@ -93,7 +93,6 @@ private:
 	inline float EstimatePeakFrequencyBin(q15_t fft[], int peak_index);
 	inline void Publish();
 	bool SensorSelectionUpdate(bool force = false);
-	void RASUpdate();
 	void Update(const hrt_abstime &timestamp_sample, int16_t *input[], uint8_t N);
 	inline void UpdateOutput(const hrt_abstime &timestamp_sample, int axis, float peak_frequencies[MAX_NUM_PEAKS],
 				 float peak_snr[MAX_NUM_PEAKS], int num_peaks_found);
