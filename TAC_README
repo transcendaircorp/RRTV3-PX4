@@ -1,0 +1,5 @@
+To use this repo on a new system:
+	- Set up an Ubuntu 22.04 WSL2 subsystem on the Windows box
+	- Follow the instructions from https://www.mathworks.com/help/uav/px4/ug/setup-px4-toolchain-wsl.html to prime the Ubuntu subsystem with necessary tools
+	- Grab the Linux x86_64 bits from https://developer.arm.com/downloads/-/gnu-rm/9-2020-q2-update and then un-tar them into the /opt directory (thus creating the /opt/gcc-arm-none-eabi-9-2020-q2-update directory)
+	- Now you can build the RRTV3-PX4 bits
