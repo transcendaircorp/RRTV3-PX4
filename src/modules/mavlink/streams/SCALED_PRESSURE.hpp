@@ -66,12 +66,15 @@ private:
 	bool send() override
 	{
 		if (_sensor_baro_sub.updated() || _differential_pressure_sub.updated()) {
+			mavlink_scaled_pressure_t msg{};
+
+#define UsingHackyMsgs 1
+#if UsingHackyMsgs
             extern int16_t SM_ControlLevel;
             extern int16_t SM_TWV;
-
-			mavlink_scaled_pressure_t msg{};
 			mavlink_scaled_pressure2_t msg2{};
 			mavlink_scaled_pressure3_t msg3{};
+#endif /* UsingHackyMsgs */
 
 			sensor_baro_s sensor_baro;
 
@@ -94,6 +97,7 @@ private:
 
 			mavlink_msg_scaled_pressure_send_struct(_mavlink->get_channel(), &msg);
 
+#if UsingHackyMsgs
             msg2.time_boot_ms = msg.time_boot_ms;
             msg2.press_abs = msg.press_abs;
             msg2.press_diff = msg.press_diff;
@@ -107,6 +111,7 @@ private:
             msg3.temperature_press_diff = msg.temperature_press_diff;
             msg3.temperature = SM_TWV;
 			mavlink_msg_scaled_pressure3_send_struct(_mavlink->get_channel(), &msg3);
+#endif
 
 			return true;
 		}
