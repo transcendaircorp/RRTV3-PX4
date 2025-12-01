@@ -3,3 +3,14 @@ To use this repo on a new system:
 	- Follow the instructions from https://www.mathworks.com/help/uav/px4/ug/setup-px4-toolchain-wsl.html to prime the Ubuntu subsystem with necessary tools
 	- Grab the Linux x86_64 bits from https://developer.arm.com/downloads/-/gnu-rm/9-2020-q2-update and then un-tar them into the /opt directory (thus creating the /opt/gcc-arm-none-eabi-9-2020-q2-update directory)
 	- Now you can build the RRTV3-PX4 bits
+
+To properly grab the bits for this repo, do:
+    % git clone git@github.com:transcendaircorp/RRTV3-PX4.git
+    % cd RRTV3-PX4
+    % git checkout v1.14.0-Auburn
+    % git submodule sync --recursive
+    % git submodule update --init --recursive
+    % cd src/modules/mavlink/mavlink
+    % git clone  https://github.com/ArduPilot/pymavlink.git 
+    % cd pymavlink
+    % git checkout v2.4.41-53-g533161c4
