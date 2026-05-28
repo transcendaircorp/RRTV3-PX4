@@ -53,3 +53,15 @@ PARAM_DEFINE_FLOAT(SENS_BARO_QNH, 1013.25f);
  * @unit Hz
  */
 PARAM_DEFINE_FLOAT(SENS_BARO_RATE, 20.0f);
+
+/**
+ * Measured wind speed
+ *
+ * Wind speed as entered by user.
+ *
+ * @min 0
+ * @max 30
+ * @group Sensors
+ * @unit kt
+ */
+PARAM_DEFINE_FLOAT(Z_WINDSPD, 0.0f);
